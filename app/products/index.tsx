@@ -5,14 +5,12 @@ import CardComp from '@/components/ui/CardComp';
 import {rentalProperties} from '../../constants/propertyList'
 import { useState } from 'react';
 
-export default function HomeScreen() {
-  //this is not redux this select by method
-const [selected, setSelected] = useState()// we not need if use redux 
+export default function AllProducts() {
+  //this is not redux this select by method-- explain select id
 const router = useRouter() as any
-//we still need function for redux
+
 const handleSelectedFunc = (id:any)=>{
-setSelected(id);
-//below param
+
 router.push(`/products/${id}`);
 }
 
@@ -24,6 +22,7 @@ router.push(`/products/${id}`);
         data={rentalProperties} // array of items
         keyExtractor={(item:any) => item.id} // unique key for each item
         renderItem={({ item }) => (
+          // part 2 select id 
           <TouchableOpacity onPress={()=>handleSelectedFunc(item.id)}>
             <CardComp
     imageProp ={item.images[0]}
