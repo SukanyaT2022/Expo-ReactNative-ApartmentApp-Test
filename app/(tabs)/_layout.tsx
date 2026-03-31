@@ -5,6 +5,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -16,11 +17,18 @@ export default function TabLayout() {
       tabBarLabel: "",
        
       }}>
+           <Tabs.Screen
+        name="productRedux"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => <Feather name="home" size={24} color="black" />,
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <Feather name="home" size={24} color="black" />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="details" size={24} color="black" />,
         }}
       />
       <Tabs.Screen

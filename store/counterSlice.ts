@@ -1,22 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface CounterState {
-  value: number;
+interface CounterSliceProp {
+id: number;
 }
 
-const initialState: CounterState = { value: 0 };
+const initialState: CounterSliceProp = { id:0};
 
 const counterSlice = createSlice({
-  name: 'counter',
+  name: 'productSlice',
   initialState,
   reducers: {
-    increment: (state) => { state.value += 1; },
-    decrement: (state) => { state.value -= 1; },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
+  storeProductID: (state,action)=>{
+    state.id = action.payload
+  }
+
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const {storeProductID} = counterSlice.actions;
 export default counterSlice.reducer;

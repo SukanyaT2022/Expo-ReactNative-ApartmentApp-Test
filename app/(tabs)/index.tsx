@@ -1,48 +1,17 @@
-import { Image } from 'expo-image';
-import { FlatList, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Link, useRouter } from 'expo-router';
-import CardComp from '@/components/ui/CardComp';
-import {rentalProperties} from '../../constants/propertyList'
-import { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { useRouter } from 'expo-router'
 
-export default function HomeScreen() {
-  //this is not redux this select by method
-const [selected, setSelected] = useState()// we not need if use redux 
-const router = useRouter() as any
-//we still need function for redux
-const handleSelectedFunc = (id:any)=>{
-setSelected(id);
-//below param
-router.push(`/products/${id}`);
-}
-
+const Home = () => {
+  const router = useRouter()
   return (
-  <View style={styles.main}>
-     <FlatList
-    //  put gap top and bottom bet each box we put contentContainerStyle =
-     contentContainerStyle = {{gap:10}}
-        data={rentalProperties} // array of items
-        keyExtractor={(item:any) => item.id} // unique key for each item
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={()=>handleSelectedFunc(item.id)}>
-            <CardComp
-    imageProp ={item.images[0]}
-    priceProp={item.price}
-    titleProp={item.type}
-    cityProp={item.city}
-   />
-   </TouchableOpacity>
-        )}
-      />
-
-  </View>
-  );
+    <View>
+      <Text>Welcome Home Screen</Text>
+      <TouchableOpacity onPress={()=>router.push('/productRedux')}><Text>See All Products</Text></TouchableOpacity>
+    </View>
+  )
 }
 
-const styles = StyleSheet.create({
- main:{
-paddingHorizontal:20,
+export default Home
 
-
- } 
-});
+const styles = StyleSheet.create({})
