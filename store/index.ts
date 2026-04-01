@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counterSlice';
+import productReducer from './productSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    //this product we use after state on selector to bring id from store to the screen
+    product: productReducer,
   },
 });
 

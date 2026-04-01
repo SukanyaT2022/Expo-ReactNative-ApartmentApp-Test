@@ -1,14 +1,21 @@
 import { View, Text, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+//redux step 1 line below
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import {rentalProperties} from '../../../constants/propertyList'
 import CardComp from '@/components/ui/CardComp';
+import { useRouter } from 'expo-router';
+import { storeProductID } from '@/store/productSlice';
 
 export default function AllProductRedux() {
-const handleSelectedFunc = (id:any)=>{
+  const router = useRouter()
+  //redux step 2- dispatch send is from udser click send to store
+  const dispatch = useAppDispatch()
 
+const handleSelectedFunc = (id:any)=>{
+  //this function and dispatch() is that user click to the store redux
+dispatch(storeProductID(id))
 router.push(`/products/${id}`);
 }
-
 
   return (
  <View style={styles.main}>

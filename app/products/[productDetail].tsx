@@ -7,7 +7,7 @@ export default function ProductDetailScreen() {
   const { productDetail } = useLocalSearchParams() as any;
 
 
-//for test
+
   //find product match that id and the whole product it self
   const selectedProduct = rentalProperties.find(
     (item) => item.id.toString() === productDetail,
