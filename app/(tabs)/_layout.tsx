@@ -24,20 +24,20 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Feather name="home" size={24} color="black" />,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <MaterialIcons name="details" size={24} color="black" />,
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
           tabBarIcon: ({ color }) => <EvilIcons name="search" size={24} color="black" />,
         }}
-      />
+      /> */}
     </Tabs>
   );
 }

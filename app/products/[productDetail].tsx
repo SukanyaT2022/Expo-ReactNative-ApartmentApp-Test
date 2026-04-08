@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { rentalProperties } from "../../constants/propertyList";
 
+
 export default function ProductDetailScreen() {
   //below for param, id-line 6 give id that we click on- we get id frm here
   const { productDetail } = useLocalSearchParams() as any;
@@ -14,6 +15,7 @@ export default function ProductDetailScreen() {
   );
   return (
     <View style={styles.main}>
+
       <Image
         source={{ uri: selectedProduct?.images[0] }}
         style={{ width: "100%", height: 200 }}
