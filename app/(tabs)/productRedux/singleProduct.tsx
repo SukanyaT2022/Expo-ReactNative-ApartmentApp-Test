@@ -18,6 +18,8 @@ const router = useRouter()
     (item) => item.id === id,
   );
 
+
+
   return (
      <View style={styles.main}>
 

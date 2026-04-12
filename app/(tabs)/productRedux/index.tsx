@@ -1,88 +1,128 @@
-import { View, Text, Button, StyleSheet, FlatList, TouchableOpacity, Dimensions, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Dimensions,
+  TextInput,
+} from "react-native";
 //redux step 1 line below
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import {rentalProperties} from '../../../constants/propertyList'
-import CardComp from '@/components/ui/CardComp';
-import { useRouter } from 'expo-router';
-import { storeProductID } from '@/store/productSlice';
-import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { rentalProperties } from "../../../constants/propertyList";
+import CardComp from "@/components/ui/CardComp";
+import { useRouter } from "expo-router";
+import { storeProductID } from "@/store/productSlice";
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
 export default function AllProductRedux() {
-  const router = useRouter()
+  const router = useRouter();
   //redux step 2- dispatch send is from udser click send to store
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-const handleSelectedFunc = (id:any)=>{
-  //this function and dispatch() is that user click to the store redux
-dispatch(storeProductID(id))
-// router.push(`/products/${id}`);
-router.push(`/productRedux/singleProduct`);
-}
+  const handleSelectedFunc = (id: any) => {
+    //this function and dispatch() is that user click to the store redux
+    dispatch(storeProductID(id));
+    // router.push(`/products/${id}`);
+    router.push(`/productRedux/singleProduct`);
+  };
 
-// search bar function part 1
-  const [storeUserType, setStoreUserType] = useState('');
-  const [storeSearchItem, setStoreSearchItem] = useState(rentalProperties) as any;
-  
-const handleSearch = (text:string) => {
+  // search bar function part 1
+  const [storeUserType, setStoreUserType] = useState("");
+  const [storeSearchItem, setStoreSearchItem] = useState(
+    rentalProperties,
+  ) as any;
+
+  const handleSearch = (text: string) => {
     setStoreUserType(text);
 
-    const filtered = rentalProperties.filter(item =>
-      item.type.toLowerCase().includes(text.toLowerCase())
+    const filtered = rentalProperties.filter((item) =>
+      item.type.toLowerCase().includes(text.toLowerCase()),
     );
 
     setStoreSearchItem(filtered);
   };
 
+  // catergory section
+const catergories = ['city', 'beach', 'mountain', 'suburb']
+const [selectItemCatergory, setSelectItemCatergory] = useState(0)
+
 
   return (
- <View style={styles.main}>
+    <View style={styles.main}>
+      {/* search bar part2 */}
+      <View style={styles.container}>
+        <Ionicons name="search" size={20} color="#666" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Search..."
+          value={storeUserType}
+          onChangeText={handleSearch}
+        />
+      </View>
 
-  {/* search bar part2 */}
- <View style={styles.container}>
-      <Ionicons name="search" size={20} color="#666" style={styles.icon} />
-      <TextInput
-        style={styles.input}
-        placeholder="Search..."
-        value={storeUserType}
-        onChangeText={handleSearch}
-      />
-    </View>
+    {/* catergory user select catergry city becach mountain */}
+      <View>
+       {catergories.map((item, index)=>{
+        return<TouchableOpacity 
+      //  in any map function need   key = {index} other wise it show warning
+        key = {index}
+        style={[
+            styles.styleSelectButton,styles.smallBoxCatergory,
+            { borderColor: selectItemCatergory === index ? 'green' :'red' },
+          ]}
+          onPress={() => setSelectItemCatergory(index)}
+        >
+          <Text>{item}</Text>
+     
+        </TouchableOpacity>
+       }       
+      )
+       } 
+        {/* <View>
+          <Text>Beach</Text>
+        </View>
+        <View>
+          <Text>Mountain</Text>
+        </View>
+        <View>
+          <Text>Suburb</Text>
+        </View> */}
+      </View>
 
-
-
-     <FlatList
-    //  put gap top and bottom bet each box we put contentContainerStyle =
-     contentContainerStyle = {{gap:10}}
-     //filtr search step 3 below
+      <FlatList
+        //  put gap top and bottom bet each box we put contentContainerStyle =
+        contentContainerStyle={{ gap: 10 }}
+        //filtr search step 3 below
         data={storeSearchItem} // array of items
-        keyExtractor={(item:any) => item.id} // unique key for each item
+        keyExtractor={(item: any) => item.id} // unique key for each item
         renderItem={({ item }) => (
-          // part 2 select id 
-          <TouchableOpacity onPress={()=>handleSelectedFunc(item.id)}>
+          // part 2 select id
+          <TouchableOpacity onPress={() => handleSelectedFunc(item.id)}>
             <CardComp
-    imageProp ={item.images[0]}
-    priceProp={item.price}
-    titleProp={item.type}
-    cityProp={item.city}
-   />
-   </TouchableOpacity>
+              imageProp={item.images[0]}
+              priceProp={item.price}
+              titleProp={item.type}
+              cityProp={item.city}
+            />
+          </TouchableOpacity>
         )}
       />
-
-  </View>
+    </View>
   );
 }
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
- main:{
-paddingHorizontal:20,
-marginTop:30,
- },
- container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+  main: {
+    paddingHorizontal: 20,
+    marginTop: 30,
+  },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
     borderRadius: 10,
     paddingHorizontal: 10,
     margin: 10,
@@ -96,4 +136,13 @@ marginTop:30,
     flex: 1,
     fontSize: 16,
   },
+  smallBoxCatergory: {
+    padding: 10,
+    borderWidth:2,
+  borderColor: "gray",
+  marginVertical:5,
+  },
+  styleSelectButton:{
+
+  }
 });
