@@ -2,6 +2,7 @@ export const rentalProperties = [
   {
     id: 1,
     type: "Home by the Beach",
+    catergory: 'Beach',
     price: 4500,    
     rateStar: 4.8,
     capacity: 4,
@@ -20,6 +21,7 @@ export const rentalProperties = [
   {
     id: 2,
     type: "Home with Mountain View",
+    catergory: 'Mountain',
     price: 3200,
     rateStar: 4.6,
     capacity: 2,
@@ -37,6 +39,7 @@ export const rentalProperties = [
   {
     id: 3,
     type: "Home in the City",
+    catergory: 'City',
     price: 6000,
     rateStar: 4.7,
     capacity: 6,
@@ -54,6 +57,7 @@ export const rentalProperties = [
   {
     id: 4,
     type: "Home in Suburb",
+    catergory: 'Suburb',
     price: 2800,
     rateStar: 4.3,
     capacity: 8,
@@ -71,6 +75,7 @@ export const rentalProperties = [
   {
     id: 5,
     type: "Home by the Beach",
+    catergory: 'Beach',
     price: 3800,
     rateStar: 4.5,
     capacity: 6,
@@ -88,6 +93,7 @@ export const rentalProperties = [
   {
     id: 6,
     type: "Home with Mountain View",
+    catergory: 'Mountain',
     price: 3500,
     rateStar: 4.9,
     capacity: 4,
@@ -105,6 +111,7 @@ export const rentalProperties = [
   {
     id: 7,
     type: "Home in the City",
+    catergory: 'City',
     price: 5200,
     rateStar: 4.4,
     capacity: 4,
@@ -122,6 +129,7 @@ export const rentalProperties = [
   {
     id: 8,
     type: "Home in Suburb",
+    catergory: 'Suburb',
     price: 2500,
     rateStar: 4.2,
     capacity: 6,
@@ -139,6 +147,7 @@ export const rentalProperties = [
   {
     id: 9,
     type: "Home by the Beach",
+    catergory: 'Beach',
     price: 4700,
     rateStar: 4.9,
     capacity: 8,

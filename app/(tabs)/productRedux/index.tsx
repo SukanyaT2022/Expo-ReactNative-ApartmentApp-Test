@@ -29,12 +29,30 @@ export default function AllProductRedux() {
     router.push(`/productRedux/singleProduct`);
   };
 
+
+
+
+  // catergory section
+const catergories = ['All','city', 'beach', 'mountain', 'suburb']
+
+//function select based on catergory city beach mountain
+//below for selected chnage border color
+const [selectItemCatergory, setSelectItemCatergory] = useState(0)
+//select and filter catergory
+const [selectedCategory, setSelectedCategory] = useState('All');
+const filteredDataFunc = selectedCategory === 'All'
+  ? rentalProperties
+  : rentalProperties.filter(item => item?.catergory?.toLowerCase() === selectedCategory.toLowerCase());
+
+
+
+
   // search bar function part 1
   const [storeUserType, setStoreUserType] = useState("");
   const [storeSearchItem, setStoreSearchItem] = useState(
-    rentalProperties,
+   filteredDataFunc,
   ) as any;
-
+// search function from search bar
   const handleSearch = (text: string) => {
     setStoreUserType(text);
 
@@ -45,9 +63,6 @@ export default function AllProductRedux() {
     setStoreSearchItem(filtered);
   };
 
-  // catergory section
-const catergories = ['city', 'beach', 'mountain', 'suburb']
-const [selectItemCatergory, setSelectItemCatergory] = useState(0)
 
 
   return (
@@ -73,7 +88,10 @@ const [selectItemCatergory, setSelectItemCatergory] = useState(0)
             styles.styleSelectButton,styles.smallBoxCatergory,
             { borderColor: selectItemCatergory === index ? 'green' :'red' },
           ]}
-          onPress={() => setSelectItemCatergory(index)}
+          onPress={() =>{
+             setSelectItemCatergory(index)
+             setSelectedCategory(item)
+            }}
         >
           <Text>{item}</Text>
      
