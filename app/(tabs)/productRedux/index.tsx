@@ -15,7 +15,7 @@ import CardComp from "@/components/ui/CardComp";
 import { useRouter } from "expo-router";
 import { storeProductID } from "@/store/productSlice";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AllProductRedux() {
   const router = useRouter();
@@ -40,30 +40,35 @@ const catergories = ['All','city', 'beach', 'mountain', 'suburb']
 const [selectItemCatergory, setSelectItemCatergory] = useState(0)
 //select and filter catergory
 const [selectedCategory, setSelectedCategory] = useState('All');
-const filteredDataFunc = selectedCategory === 'All'
-  ? rentalProperties
-  : rentalProperties.filter(item => item?.catergory?.toLowerCase() === selectedCategory.toLowerCase());
+const [storeCatergoryData, setStoreCatergoryData] = useState(rentalProperties)
+useEffect(()=>{
+if (selectedCategory === 'All'){
+  setStoreCatergoryData(rentalProperties)
+}else{
+const data = rentalProperties.filter(item => item?.catergory?.toLowerCase() === selectedCategory.toLowerCase());
+setStoreCatergoryData(data)
+}
+},[selectedCategory])
 
+console.log('test',storeCatergoryData)
 
 
 
   // search bar function part 1
   const [storeUserType, setStoreUserType] = useState("");
   const [storeSearchItem, setStoreSearchItem] = useState(
-   filteredDataFunc,
+storeCatergoryData,
   ) as any;
 // search function from search bar
   const handleSearch = (text: string) => {
     setStoreUserType(text);
 
-    const filtered = rentalProperties.filter((item) =>
+    const filtered = storeCatergoryData.filter((item) =>
       item.type.toLowerCase().includes(text.toLowerCase()),
     );
 
     setStoreSearchItem(filtered);
   };
-
-
 
   return (
     <View style={styles.main}>
